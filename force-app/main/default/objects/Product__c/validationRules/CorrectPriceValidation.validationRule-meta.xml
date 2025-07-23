@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CorrectPriceValidation</fullName>
+    <active>true</active>
+    <description>Запрещает создание записей, если цена продукта меньше или равна 0</description>
+    <errorConditionFormula>UnitPrice__c &lt;= 0</errorConditionFormula>
+    <errorMessage>Product price must be greater then 0.</errorMessage>
+</ValidationRule>

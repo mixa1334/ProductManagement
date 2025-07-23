@@ -1,0 +1,26 @@
+<template>
+     <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+    <thead>
+      <tr>
+        <th>Image</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Available Units</th>
+      </tr>
+    </thead>
+    <tbody>
+      <template for:each={products} for:item="product">
+        <tr key={product.Id}>
+          <td>
+            <img src={product.ImageURL__c} alt="Product image" style="height:50px;" />
+          </td>
+          <td>{product.Name}</td>
+          <td>{product.Description__c}</td>
+          <td>{product.UnitPrice__c}</td>
+          <td>{product.UnitsAvailable__c}</td>
+        </tr>
+      </template>
+    </tbody>
+  </table>
+</template>
