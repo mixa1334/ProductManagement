@@ -4,7 +4,7 @@ public with sharing class ProductTriggerHelper {
             if(isNew && product.AddedDate__c == null){
                 product.AddedDate__c = System.now();
             }
-            if(product.Description__c.length() > 200){
+            if(String.isNotBlank(product.Description__c) && product.Description__c.length() > 200){
                 product.Description__c = product.Description__c.substring(0, 197) + '...';
             }
         }

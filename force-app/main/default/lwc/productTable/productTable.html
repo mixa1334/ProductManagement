@@ -1,5 +1,30 @@
 <template>
-     <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+
+    <template if:true={isFormVisible}>
+    <lightning-card title="New Product" class="slds-m-bottom_medium">
+      <div class="slds-p-horizontal_medium">
+        <lightning-input label="Name" value={formData.Name} onchange={handleInput} data-field="Name" required></lightning-input>
+        <lightning-input label="Image URL" value={formData.ImageURL__c} onchange={handleInput} data-field="ImageURL__c"></lightning-input>
+        <lightning-input type="number" label="Unit Price" value={formData.UnitPrice__c} onchange={handleInput} data-field="UnitPrice__c" required></lightning-input>
+        <lightning-input type="number" label="Units Available" value={formData.UnitsAvailable__c} onchange={handleInput} data-field="UnitsAvailable__c"></lightning-input>
+        <lightning-input type="date" label="Added Date" value={formData.AddedDate__c} onchange={handleInput} data-field="AddedDate__c"></lightning-input>
+        <lightning-textarea label="Description" value={formData.Description__c} onchange={handleInput} data-field="Description__c"></lightning-textarea>
+
+        <div class="slds-m-top_medium">
+          <lightning-button variant="brand" label="Save" onclick={handleSave}></lightning-button>
+          <lightning-button variant="neutral" label="Cancel" onclick={handleCancel} class="slds-m-left_small"></lightning-button>
+        </div>
+        <template if:true={errorMsg}>
+          <p class="slds-text-color_error slds-m-top_small">{errorMsg}</p>
+        </template>
+      </div>
+    </lightning-card>
+  </template>
+
+
+<template if:false={isFormVisible}>
+  <lightning-button label="New" onclick={handleNew} class="slds-m-bottom_medium"></lightning-button>
+       <table class="slds-table slds-table_cell-buffer slds-table_bordered">
     <thead>
       <tr>
         <th>Image</th>
@@ -23,4 +48,5 @@
       </template>
     </tbody>
   </table>
+</template>
 </template>
