@@ -1,12 +1,23 @@
 public with sharing class ProductTriggerHelper {
-    public static void process(List<Product__c> products, Boolean isNew) {
+    public static void processInsert(List<Product__c> products) {
         for(Product__c product : products){
-            if(isNew && product.AddedDate__c == null){
+            if(product.AddedDate__c == null){
                 product.AddedDate__c = System.now();
             }
-            if(String.isNotBlank(product.Description__c) && product.Description__c.length() > 200){
-                product.Description__c = product.Description__c.substring(0, 197) + '...';
-            }
+            formatDescription(product);
+        }
+    }
+
+    public static void processUpdate(List<Product__c> products){
+        for(Product__c product : products){
+            formatDescription(product);
+        }
+    }
+
+    private static void formatDescription(Product__c product){
+        String description = product.Description__c;
+        if(String.isNotBlank(description)){
+            product.Description__c = description.normalizeSpace().abbreviate(200);
         }
     }
 }

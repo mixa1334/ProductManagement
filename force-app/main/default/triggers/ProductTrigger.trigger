@@ -1,3 +1,7 @@
 trigger ProductTrigger on Product__c (before insert, before update) {
-    ProductTriggerHelper.process(Trigger.new, Trigger.isInsert);
+    if(Trigger.isInsert){
+        ProductTriggerHelper.processInsert(Trigger.new);
+    }else{
+        ProductTriggerHelper.processUpdate(Trigger.new);
+    }
 }
